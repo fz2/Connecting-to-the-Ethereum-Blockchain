@@ -41,3 +41,4 @@ def connect_to_bnb():
 
 if __name__ == "__main__":
 	connect_to_eth()
+	connect_to_bnb()
