@@ -55,6 +55,7 @@ def is_ordered_block(w3, block_num):
 	gasPriceList = []
 	for transaction in transactions:
 		hexbyte = transaction.split('''''')[1]
+		print(hexbyte)
 		type = w3.eth.get_transaction(hexbyte).get(type)
 		print(type)
 	
