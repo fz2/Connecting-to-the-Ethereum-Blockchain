@@ -85,7 +85,7 @@ def get_contract_values(contract, admin_address, owner_address):
 
 	# TODO complete the following lines by performing contract calls
 	print(contract.address)
-	print(contract.abi)
+	print(contract.all_functions)
 	onchain_root = 0  # Get and return the merkleRoot from the provided contract
 	has_role = 0  # Check the contract to see if the address "admin_address" has the role "default_admin_role"
 	prime = 0  # Call the contract to get the prime owned by "owner_address"
