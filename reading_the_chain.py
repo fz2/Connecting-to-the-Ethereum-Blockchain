@@ -52,16 +52,20 @@ def is_ordered_block(w3, block_num):
 	"""
 	block = w3.eth.get_block(block_num)
 	transactions = block.get('transactions')
-	print(transactions)
+	
 	gasPriceList = []
 	for transaction in transactions:
-		type_number = w3.eth.get_transaction(transaction).get('type')
-		print(type_number)
-	
-	ordered = False
-
+		transaction_index = w3.eth.get_transaction(transaction).get('transaction_index')
+		type = w3.eth.get_transaction(transaction).get('type')
+		gasPrice = w3.eth.get_transaction(transaction).get('gasPrice')
+		gasPriceList.append(gasPrice)
+		
+	if gasPriceList == sorted(gasPriceList, reverse = True):
+		ordered = True
+	else: 
+		ordered = False
+		
 	# TODO YOUR CODE HERE
-
 	return ordered
 
 
