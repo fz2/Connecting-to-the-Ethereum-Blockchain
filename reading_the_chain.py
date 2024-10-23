@@ -64,8 +64,6 @@ def is_ordered_block(w3, block_num):
 		ordered = True
 	else: 
 		ordered = False
-		
-	# TODO YOUR CODE HERE
 	return ordered
 
 
@@ -86,7 +84,7 @@ def get_contract_values(contract, admin_address, owner_address):
 	default_admin_role = int.to_bytes(0, 32, byteorder="big")
 
 	# TODO complete the following lines by performing contract calls
-	onchain_root = 0  # Get and return the merkleRoot from the provided contract
+	onchain_root = contract.merkleRoot  # Get and return the merkleRoot from the provided contract
 	has_role = 0  # Check the contract to see if the address "admin_address" has the role "default_admin_role"
 	prime = 0  # Call the contract to get the prime owned by "owner_address"
 
