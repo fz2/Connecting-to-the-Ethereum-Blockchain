@@ -55,7 +55,7 @@ def is_ordered_block(w3, block_num):
 	print(transactions)
 	gasPriceList = []
 	for transaction in transactions:
-		type_number = w3.eth.get_transaction(transaction).get(type)
+		type_number = w3.eth.get_transaction(transaction).get('type')
 		print(type_number)
 	
 	ordered = False
