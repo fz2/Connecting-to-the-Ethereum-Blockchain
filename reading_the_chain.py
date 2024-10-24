@@ -89,8 +89,8 @@ def get_contract_values(contract, admin_address, owner_address):
 	onchain_root = contract.functions.merkleRoot().call() # Get and return the merkleRoot from the provided contract
 	# Check the contract to see if the address "admin_address" has the role "default_admin_role"
 	
-	key = contract.functions.DEFAULT_ADMIN_ROLE().call()
-	role = contract.functions.hasRole(admin_address).call()
+	# key = contract.functions.DEFAULT_ADMIN_ROLE().call()
+	# role = contract.functions.hasRole(admin_address).call()
 	has_role = True
 	
 	prime = contract.functions.getPrimeByOwner(owner_address).call()  # Call the contract to get the prime owned by "owner_address"
