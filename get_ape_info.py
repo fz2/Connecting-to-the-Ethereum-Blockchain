@@ -23,6 +23,8 @@ web3 = Web3(provider)
 
 ############################
 #Get Contract ABI from etherscan
+bayc_address = "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D"
+contract_address = Web3.toChecksumAddress(bayc_address)
 ABI_ENDPOINT = 'https://api.etherscan.io/api?module=contract&action=getabi&address='
 try:
 	response = requests.get( f"{ABI_ENDPOINT}{contract_address}", timeout = 20 )	
@@ -30,9 +32,6 @@ try:
 except Exception as e:
 	print( f"Failed to get {contract_address} from {ABI_ENDPOINT}" )
 	print( e )
-
-bayc_address = "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D"
-
 
 def get_ape_info(apeID):
 	assert isinstance(apeID,int), f"{apeID} is not an int"
