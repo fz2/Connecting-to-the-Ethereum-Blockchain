@@ -28,7 +28,7 @@ def get_ape_info(apeID):
 	contract = web3.eth.contract(address=contract_address,abi=abi)
 	data['owner']= contract.functions.ownerOf(apeID).call()
 	token_url = contract.functions.tokenURI(apeID).call()
-	url = https://gateway.pinata.cloud/ipfs/QmeSjSinHpPnmXmspMjwiXyN6zS4E9zccariGR3jxcaWtq/f{'apeID'}
+	url = f"https://gateway.pinata.cloud/ipfs/QmeSjSinHpPnmXmspMjwiXyN6zS4E9zccariGR3jxcaWtq/{apeID}"
 	print(url)
 	
 	assert isinstance(data,dict), f'get_ape_info{apeID} should return a dict' 
