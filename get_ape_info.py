@@ -27,6 +27,7 @@ def get_ape_info(apeID):
 	data = {'owner': "", 'image': "", 'eyes': "" }
 	contract = web3.eth.contract(address=contract_address,abi=abi)
 	data['owner']= contract.functions.ownerOf(apeID).call()
+	print(data)
 	
 	assert isinstance(data,dict), f'get_ape_info{apeID} should return a dict' 
 	assert all( [a in data.keys() for a in ['owner','image','eyes']] ), f"return value should include the keys 'owner','image' and 'eyes'"
