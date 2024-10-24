@@ -34,6 +34,7 @@ def get_ape_info(apeID):
 	response = requests.get(url, headers = headers)  
 	response = response.json()
 	attributes = response.get('attributes')
+	print(attributes)
 	data['image'] = response.get('image')
 	
 	assert isinstance(data,dict), f'get_ape_info{apeID} should return a dict' 
