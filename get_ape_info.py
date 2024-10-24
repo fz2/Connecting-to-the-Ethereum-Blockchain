@@ -27,6 +27,8 @@ def get_ape_info(apeID):
 	data = {'owner': "", 'image': "", 'eyes': "" }
 	contract = web3.eth.contract(address=contract_address,abi=abi)
 	data['owner']= contract.functions.ownerOf(apeID).call()
+	token_url = contract.functions.tokenURI(apeID).call()
+	print(token_url)
 	print(data)
 	
 	assert isinstance(data,dict), f'get_ape_info{apeID} should return a dict' 
