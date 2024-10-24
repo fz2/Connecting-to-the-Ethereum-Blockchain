@@ -26,7 +26,7 @@ def get_ape_info(apeID):
 	assert 1 <= apeID, f"{apeID} must be at least 1"
 	data = {'owner': "", 'image': "", 'eyes': "" }
 	contract = web3.eth.contract(address=contract_address,abi=abi)
-	print(contract.functions.name().call())
+	print(contract.functions.ownerOf(apeID))
 
 	
 	assert isinstance(data,dict), f'get_ape_info{apeID} should return a dict' 
