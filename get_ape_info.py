@@ -21,13 +21,25 @@ api_url = "https://eth-mainnet.g.alchemy.com/v2/IG7wrFRmtHeqWJhetwsW7pwjQxgcRuns
 provider = HTTPProvider(api_url)
 web3 = Web3(provider)
 
-print(web3.is_connected())
+############################
+#Get Contract ABI from etherscan
+ABI_ENDPOINT = 'https://api.etherscan.io/api?module=contract&action=getabi&address='
+try:
+	response = requests.get( f"{ABI_ENDPOINT}{contract_address}", timeout = 20 )	
+	abi = response.json()
+except Exception as e:
+	print( f"Failed to get {contract_address} from {ABI_ENDPOINT}" )
+	print( e )
+
+bayc_address = "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D"
+
 
 def get_ape_info(apeID):
 	assert isinstance(apeID,int), f"{apeID} is not an int"
 	assert 1 <= apeID, f"{apeID} must be at least 1"
 	data = {'owner': "", 'image': "", 'eyes': "" }
-	
+	contract = web3.eth.contract(address=contract_address,abi=abi)
+	print(contract.address)
 
 	
 	assert isinstance(data,dict), f'get_ape_info{apeID} should return a dict' 
