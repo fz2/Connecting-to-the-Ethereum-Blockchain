@@ -21,7 +21,7 @@ api_url = "https://eth-mainnet.g.alchemy.com/v2/IG7wrFRmtHeqWJhetwsW7pwjQxgcRuns
 provider = HTTPProvider(api_url)
 web3 = Web3(provider)
 
-print(web3.isConnected())
+print(web3.is_connected())
 
 def get_ape_info(apeID):
 	assert isinstance(apeID,int), f"{apeID} is not an int"
