@@ -8,16 +8,16 @@ def sign(m):
     # create an eth account and recover the address (derived from the public key) and private key
     # your code here
     account = w3.eth.account.create()
-    private_key = os.environ.get("PRIVATE_KEY")
+    private_key = os.environ.get('PRIVATE_KEY')
 
     eth_address = account.address()  # Eth account
 
     # generate signature
     # your code here
-    msg = "fz"
+    msg = 'fz'
     message = encode_defunct(text=msg)
     signed_message = w3.eth.account.sign_message(message, private_key=private_key)
-    
+
     assert isinstance(signed_message, eth_account.datastructures.SignedMessage)
 
     return eth_address, signed_message
