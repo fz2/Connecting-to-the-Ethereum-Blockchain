@@ -9,6 +9,7 @@ def sign(m):
     account = w3.eth.account.create()
     private_key = w3.to_hex(account.key)
     eth_address = account.address # Eth account
+    print(private_key)
 
     # generate signature
     # your code here
