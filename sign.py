@@ -8,13 +8,11 @@ def sign(m):
     # your code here
     account = w3.eth.account.create()
     private_key = w3.to_hex(account.key)
-
     eth_address = account.address # Eth account
-    print(eth_address)
 
     # generate signature
     # your code here
-    msg = 'fz'
+    msg = 'fzhang'
     message = encode_defunct(text=msg)
     signed_message = w3.eth.account.sign_message(message, private_key=private_key)
 
