@@ -670,5 +670,5 @@ abi = [
 
 contract = web3.eth.contract(address=contract_address,abi=abi)
 
-contract.functions.claim("0x036A98Da10327e972B6C73dA7357ceE376A2c6c2", "0x9b9dd524b0dcc2c66f8c912cc577da7708b8ae9d064d73cfbabe6ca9cb96272f").call()
+contract.functions.claim("0x036A98Da10327e972B6C73dA7357ceE376A2c6c2", 17727341552953383747).call()
 
