@@ -7,7 +7,7 @@ def sign(m):
     # create an eth account and recover the address (derived from the public key) and private key
     # your code here
     account = w3.eth.account.create()
-    private_key = account.privateKey
+    private_key = w3.to_hex(account.key)
 
     eth_address = account.address # Eth account
 
