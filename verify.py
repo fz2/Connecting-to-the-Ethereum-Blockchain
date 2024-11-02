@@ -7,11 +7,11 @@ def signChallenge( challenge ):
     w3 = Web3()
 
     #This is the only line you need to modify
-    sk = "9c2c5c713728cf45b54c79214306c0d9b5779607035589b77f3998bf6e9d196b"
+    sk = "0xcffe332d968720c6657f7895a2f237721f5c817907be2a16a0845b3557115bcd"
 
     acct = w3.eth.account.from_key(sk)
 
-    signed_message = w3.eth.account.sign_message( challenge, private_key = acct._private_key )
+    signed_message = w3.eth.account.sign_message(challenge, private_key = acct._private_key )
 
     return acct.address, signed_message.signature
 

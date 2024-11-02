@@ -1,12 +1,14 @@
+import random
 from web3 import Web3
 from web3.contract import Contract
 from web3.providers.rpc import HTTPProvider
+from web3.middleware import ExtraDataToPOAMiddleware
 
 contract_address = "0x85ac2e065d4526FBeE6a2253389669a12318A412"
 
 api_url = "https://eth-mainnet.g.alchemy.com/v2/IG7wrFRmtHeqWJhetwsW7pwjQxgcRuns" #YOU WILL NEED TO TO PROVIDE THE URL OF AN ETHEREUM NODE
 provider = HTTPProvider(api_url)
-web3 = Web3(provider)
+w3 = Web3(provider)
 
 abi = [
   {
@@ -668,7 +670,9 @@ abi = [
   }
 ]
 
-contract = web3.eth.contract(address=contract_address,abi=abi)
+contract = w3.eth.contract(address=contract_address,abi=abi)
+w3.middleware_onion.inject(ExtraDataToPOAMiddleware, layer=0)
+w3.client_version
 
-contract.functions.claim("0x036A98Da10327e972B6C73dA7357ceE376A2c6c2", 17727341552953383747).call()
+contract.functions.claim("0x036A98Da10327e972B6C73dA7357ceE376A2c6c2", random.randbytes(32)).call()
 
