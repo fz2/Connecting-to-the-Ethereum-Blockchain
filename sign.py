@@ -6,10 +6,9 @@ def sign(m):
     w3 = Web3()
     # create an eth account and recover the address (derived from the public key) and private key
     # your code here
-    account = "0xdd97b1b9f46CB7806bDB6eb54704814dCb162273"
     private_key = "0x9b9dd524b0dcc2c66f8c912cc577da7708b8ae9d064d73cfbabe6ca9cb96272f"
 
-    eth_address = account.address()  # Eth account
+    eth_address = "0xdd97b1b9f46CB7806bDB6eb54704814dCb162273"  # Eth account
 
     # generate signature
     # your code here
