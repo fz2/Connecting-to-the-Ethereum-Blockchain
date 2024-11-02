@@ -10,6 +10,7 @@ def sign(m):
     private_key = w3.to_hex(account.key)
 
     eth_address = account.address # Eth account
+    print(eth_address)
 
     # generate signature
     # your code here
