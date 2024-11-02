@@ -3,6 +3,7 @@ from web3 import Web3
 from web3.contract import Contract
 from web3.providers.rpc import HTTPProvider
 from web3.middleware import ExtraDataToPOAMiddleware
+from web3.middleware import SignAndSendRawMiddlewareBuilder
 
 contract_address = "0x85ac2e065d4526FBeE6a2253389669a12318A412"
 
@@ -11,6 +12,7 @@ provider = HTTPProvider(api_url)
 w3 = Web3(provider)
 
 abi = [
+
   {
     "inputs": [
       {
@@ -669,10 +671,11 @@ abi = [
     "type": "function"
   }
 ]
+account_addr=  "0xeD2dDD618865a33291a27905592a61Bac72B2450"
+w3.middleware_onion.inject(ExtraDataToPOAMiddleware, layer=0)
+w3.middleware_onion.add(SignAndSendRawMiddlewareBuilder(account_addr))
 
 contract = w3.eth.contract(address=contract_address,abi=abi)
-w3.middleware_onion.inject(ExtraDataToPOAMiddleware, layer=0)
-w3.client_version
 
-contract.functions.claim("0x036A98Da10327e972B6C73dA7357ceE376A2c6c2", random.randbytes(32)).call()
+contract.functions.claim(account_addr, random.randbytes(32))
 
