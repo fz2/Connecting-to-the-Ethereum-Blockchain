@@ -3,11 +3,10 @@ from web3 import Web3
 from web3.contract import Contract
 from web3.providers.rpc import HTTPProvider
 from web3.middleware import ExtraDataToPOAMiddleware
-from web3.middleware import SignAndSendRawMiddlewareBuilder
 
 contract_address = "0x85ac2e065d4526FBeE6a2253389669a12318A412"
 
-api_url = "https://eth-mainnet.g.alchemy.com/v2/IG7wrFRmtHeqWJhetwsW7pwjQxgcRuns" #YOU WILL NEED TO TO PROVIDE THE URL OF AN ETHEREUM NODE
+api_url = "https://api.avax-test.network/ext/bc/C/rpc" 
 provider = HTTPProvider(api_url)
 w3 = Web3(provider)
 
@@ -672,10 +671,16 @@ abi = [
   }
 ]
 account_addr=  "0xeD2dDD618865a33291a27905592a61Bac72B2450"
+private_key = "0xcffe332d968720c6657f7895a2f237721f5c817907be2a16a0845b3557115bcd"
 w3.middleware_onion.inject(ExtraDataToPOAMiddleware, layer=0)
-w3.middleware_onion.add(SignAndSendRawMiddlewareBuilder(account_addr))
 
 contract = w3.eth.contract(address=contract_address,abi=abi)
 
-contract.functions.claim(account_addr, random.randbytes(32))
+unsent_tx =contract.functions.claim(account_addr, random.randbytes(32)).build_transaction({
+    "from": account_addr,
+    "nonce": w3.eth.get_transaction_count(account_addr),
+})
+signed_tx = w3.eth.account.sign_transaction(unsent_tx, private_key=private_key)
+tx_hash = w3.eth.send_raw_transaction(signed_tx.raw_transaction)
+w3.eth.wait_for_transaction_receipt(tx_hash)
 
