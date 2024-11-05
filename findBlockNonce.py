@@ -23,13 +23,12 @@ def mine_block(k, prev_hash, rand_lines):
     while(run): 
         nonce_string = str(random.randbytes(32))
         nonce = nonce_string.encode('utf-8')
-        prev_hash = str(prev_hash)
 
         ''' how to add prev_hash and nonce to it'''
-        rand_lines.insert(0,prev_hash)
+        m = hashlib.sha256()
+        m.update(prev_hash)
         rand_lines.append(nonce_string)
 
-        m = hashlib.sha256()
         for line in rand_lines:
             m.update(line.encode('utf-8'))
         
