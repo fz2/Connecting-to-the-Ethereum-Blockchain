@@ -4,7 +4,7 @@ import string
 import json
 from pathlib import Path
 from web3 import Web3
-from web3.middleware import geth_poa_middleware  # Necessary for POA chains
+ # from web3.middleware import geth_poa_middleware # Necessary for POA chains
 import math
 
 
@@ -58,13 +58,8 @@ def generate_primes(num_primes):
                 break
         if(flag):
             primes_list.append(i)
-            print(i, end=" ")
             X+=1
         i+=1
-    print(primes_list)
-
-    #TODO YOUR CODE HERE
-
     return primes_list
 
 
@@ -80,7 +75,7 @@ def convert_leaves(primes_list):
         formatted_item = item.to_bytes(32, 'big')
         formatted_lst.append(formatted_item)
 
-    return []
+    return formatted_lst
 
 
 def build_merkle(leaves):

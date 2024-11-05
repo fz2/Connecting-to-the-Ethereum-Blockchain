@@ -28,7 +28,6 @@ def mine_block(k, prev_hash, rand_lines):
         m = hashlib.sha256()
         m.update(prev_hash)
    
-
         for line in rand_lines:
             m.update(line.encode('utf-8'))
         
