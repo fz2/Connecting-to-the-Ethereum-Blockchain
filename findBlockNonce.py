@@ -36,7 +36,7 @@ def mine_block(k, prev_hash, rand_lines):
         h_bin = bin(int(final, base=16))
 
 
-        if (len(h_bin) - len(h_bin.rstrip('0'))) == k:
+        if (len(h_bin) - len(h_bin.rstrip('0'))) >= k:
             run = False
 
     assert isinstance(nonce, bytes), 'nonce should be of type bytes'
