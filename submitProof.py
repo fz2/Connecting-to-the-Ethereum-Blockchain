@@ -4,7 +4,7 @@ import string
 import json
 from pathlib import Path
 from web3 import Web3
- # from web3.middleware import geth_poa_middleware # Necessary for POA chains
+from web3.middleware import geth_poa_middleware # Necessary for POA chains
 import math
 
 
@@ -88,7 +88,8 @@ def build_merkle(leaves):
 
     #TODO YOUR CODE HERE
     tree = []
-
+    tree[0] = leaves 
+    
     return tree
 
 
