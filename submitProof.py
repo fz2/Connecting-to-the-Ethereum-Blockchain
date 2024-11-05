@@ -26,7 +26,7 @@ def merkle_assignment():
     tree = build_merkle(leaves)
 
     # Select a random leaf and create a proof for that leaf
-    random_leaf_index = 0 #TODO generate a random index from primes to claim (0 is already claimed)
+    random_leaf_index = 3 #TODO generate a random index from primes to claim (0 is already claimed)
     proof = prove_merkle(tree, random_leaf_index)
 
     # This is the same way the grader generates a challenge for sign_challenge()
@@ -87,9 +87,17 @@ def build_merkle(leaves):
     """
 
     #TODO YOUR CODE HERE
-    tree = []
-    tree[0] = leaves 
+    # sort the leaves
     
+
+    # # if odd numbers, add another element as the last element and hash with itself 
+    if (len(leaves) %2 != 0): leaves.append(leaves[-1])
+
+    tree = []
+    tree[0] = leaves
+    for int i = 
+
+
     return tree
 
 
@@ -102,6 +110,7 @@ def prove_merkle(merkle_tree, random_indx):
     """
     merkle_proof = []
     # TODO YOUR CODE HERE
+
 
     return merkle_proof
 
@@ -139,8 +148,16 @@ def send_signed_msg(proof, random_leaf):
     w3 = connect_to(chain)
 
     # TODO YOUR CODE HERE
-    tx_hash = 'placeholder'
+    private_key = "0xcffe332d968720c6657f7895a2f237721f5c817907be2a16a0845b3557115bcd"
+    contract = w3.eth.contract(address=address,abi=abi)
 
+    unsent_tx =contract.functions.submit(proof, random_leaf).build_transaction({
+    "from": address,
+    "nonce": w3.eth.get_transaction_count(address),
+})
+    signed_tx = w3.eth.account.sign_transaction(unsent_tx, private_key=private_key)
+    tx_hash = w3.eth.send_raw_transaction(signed_tx.raw_transaction)
+    
     return tx_hash
 
 
