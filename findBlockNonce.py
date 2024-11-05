@@ -26,7 +26,7 @@ def mine_block(k, prev_hash, rand_lines):
         prev_hash = str(prev_hash)
 
         ''' how to add prev_hash and nonce to it'''
-        rand_lines.insert(prev_hash,0)
+        rand_lines.insert(0,prev_hash)
         rand_lines.append(nonce_string)
 
         m = hashlib.sha256()
