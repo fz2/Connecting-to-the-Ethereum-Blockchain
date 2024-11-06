@@ -91,7 +91,6 @@ def build_merkle(leaves):
 
     tree = []
     tree.append(leaves)
-    print(leaves)
     combinedhashes = []
 
     for i in range(0, len(leaves), 2):
