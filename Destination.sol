@@ -38,7 +38,7 @@ contract Destination is AccessControl {
 		// When the createToken function is called, it will deploy a new BridgeToken contract, and return the address of the newly created contract.
         BridgeToken newToken = new BridgeToken(_underlying_token, name,symbol, _underlying_token);
         emit Creation(_underlying_token, address(newToken));
-        return address(newToken)
+        return address(newToken);
 
 	}
 }
