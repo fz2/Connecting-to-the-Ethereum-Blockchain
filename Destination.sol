@@ -40,7 +40,7 @@ contract Destination is AccessControl {
     emit Creation(_underlying_token, address(newToken));
     underlying_tokens[_underlying_token] = _underlying_token;
     wrapped_tokens[address(this)] = address(this);
-    tokens.push(newToken);
+    tokens.push(address(newToken));
     return address(newToken);
 
 	}
