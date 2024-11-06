@@ -24,7 +24,7 @@ contract Destination is AccessControl {
 
 	function wrap(address _underlying_token, address _recipient, uint256 _amount ) public onlyRole(WARDEN_ROLE) {
     // This function must check that underlying asset has been “registered,” i.e., that the owner of the destination contract has called createToken on the underlying asset.
-    _burnfrom(_underlying_token, amount);
+         _burnfrom(_underlying_token, _amount);
 		_mint(_recipient, _amount);
     emit Wrap(_underlying_token, address(this), _recipient, _amount);
 	}
