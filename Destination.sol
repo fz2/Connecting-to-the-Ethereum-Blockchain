@@ -26,12 +26,12 @@ contract Destination is AccessControl {
 		//This function should lookup the BridgeToken that corresponds to the underlying asset, and mint the correct amount of BridgeTokens to the recipient.
     // This function must check that underlying asset has been “registered,” i.e., that the owner of the destination contract has called createToken on the underlying asset.
 
-		_mint(_underlying_token, _amount)
+		//_mint(_underlying_token, _amount)
 	}
 
 	function unwrap(address _wrapped_token, address _recipient, uint256 _amount ) public {
 		//YOUR CODE HERE, Anyone should be able to unwrap BridgeTokens, but only tokens they own.
-		_burnfrom(_wrapped_token, _amount)
+		//_burnfrom(_wrapped_token, _amount)
 	}
 
 	function createToken(address _underlying_token, string memory name, string memory symbol ) public onlyRole(CREATOR_ROLE) returns(address) {
