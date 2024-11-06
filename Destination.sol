@@ -33,15 +33,13 @@ contract Destination is AccessControl {
 		//YOUR CODE HERE, Anyone should be able to unwrap BridgeTokens, but only tokens they own.
 		//_burnfrom(_wrapped_token, _amount)
 	}
-
 	function createToken(address _underlying_token, string memory name, string memory symbol ) public onlyRole(CREATOR_ROLE) returns(address) {
 		// When the createToken function is called, it will deploy a new BridgeToken contract, and return the address of the newly created contract.
-    require(msg.sender == CREATOR_ROLE)
-    BridgeToken newToken = BridgeToken(_underlying_token, memory name, memory symbol, CREATOR_ROLE)
-    emit Creation(_underlying_token, newToken.address)
-    return newToken.address
+    require(msg.sender == CREATOR_ROLE);
+    BridgeToken newToken = BridgeToken(_underlying_token, memory name, memory symbol, CREATOR_ROLE);
+    emit Creation(_underlying_token, newToken.address);
+    return newToken.address;
 
 	}
 }
-
 
