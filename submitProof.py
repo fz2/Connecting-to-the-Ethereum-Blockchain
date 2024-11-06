@@ -90,11 +90,11 @@ def build_merkle(leaves):
     #TODO YOUR CODE HERE
 
     tree = []
+    tree.append(leaves)
     print(leaves)
     combinedhashes = []
 
     for i in range(0, len(leaves), 2):
-        print(i)
         combinedhash = hashlib.sha256(leaves[i] + leaves[i+1]).hexdigest()
         combinedhashes.append(combinedhash)
 
