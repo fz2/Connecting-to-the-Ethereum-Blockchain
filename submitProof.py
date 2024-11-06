@@ -6,6 +6,7 @@ from pathlib import Path
 from web3 import Web3
 from web3.middleware import geth_poa_middleware # Necessary for POA chains
 import math
+import hashlib
 
 
 def merkle_assignment():
@@ -87,15 +88,11 @@ def build_merkle(leaves):
     """
 
     #TODO YOUR CODE HERE
-    # sort the leaves
-    
-
-    # # if odd numbers, add another element as the last element and hash with itself 
-    if (len(leaves) %2 != 0): leaves.append(leaves[-1])
 
     tree = []
     tree[0] = leaves
-    for int i = 
+    for i in range(0, len(leaves)):
+        combinedhash = hashlib.sha256(leaves[i] + leaves[i+1]).hexdigest()
 
 
     return tree
