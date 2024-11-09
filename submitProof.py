@@ -138,7 +138,7 @@ def sign_challenge(challenge):
     # TODO YOUR CODE HERE
     w3 = Web3()
     eth_encoded_msg = eth_account.messages.encode_defunct(text=challenge)
-    eth_sig_obj = w3.eth.account.sign_message(challenge, private_key = eth_sk)
+    eth_sig_obj = w3.eth.account.sign_message(eth_encoded_msg, private_key = eth_sk)
 
     return addr, eth_sig_obj.signature.hex()
 
