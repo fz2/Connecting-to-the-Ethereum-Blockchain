@@ -113,6 +113,8 @@ def prove_merkle(merkle_tree, random_indx):
     # TODO YOUR CODE HERE
     current_N = random_indx 
     for i in range(len(merkle_tree)-1):
+        current_N = (len(merkle_tree[-1]) // 2) * 2
+    for i in range(len(merkle_tree)-1):
         if (len(merkle_tree[i]) %2 == 1):
             merkle_proof.append(merkle_tree[i][current_N-1])
         else:
