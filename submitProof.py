@@ -90,18 +90,20 @@ def build_merkle(leaves):
     #TODO YOUR CODE HERE
 
     tree = []
+    size = len(leaves)
     tree.append(leaves)
-    combinedhashes = []
 
-    for i in range(0, len(leaves), 2):
-        combinedhash = hashlib.sha256(leaves[i] + leaves[i+1]).hexdigest()
-        combinedhashes.append(combinedhash)
-
-    tree.append(combinedhashes)
+    while size != 1: 
+        combinedhashes = []
+        for i in range(0, size, 2):
+            combinedhash = hashlib.sha256(leaves[i] + leaves[i+1]).hexdigest()
+            combinedhashes.append(combinedhash)
+        tree.append(combinedhashes)
+        size = size/2
     return tree
 
 
-def prove_merkle(merkle_tree, random_indx):
+def prove_merkle(merkle_tree, random_indx):s
     """
         Takes a random_index to create a proof of inclusion for and a complete Merkle tree
         as a list of lists where index 0 is the list of leaves, index 1 is the list of
