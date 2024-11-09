@@ -25,6 +25,8 @@ contract Destination is AccessControl {
 	function wrap(address _underlying_token, address _recipient, uint256 _amount ) public onlyRole(WARDEN_ROLE) {
     // This function must check that underlying asset has been “registered,” i.e., that the owner of the destination contract has called createToken on the underlying asset.
     require(wrapped_tokens[_underlying_token] != address(0));
+   require( _amount > 0, 'Cannot mint 0' );
+    require( _recipient != address(0), 'Cannot unwrap to 0 address' );
     BridgeToken(wrapped_tokens[_underlying_token]).mint(_recipient, _amount);
 
     emit Wrap(_underlying_token,wrapped_tokens[_underlying_token], _recipient, _amount);
@@ -33,6 +35,8 @@ contract Destination is AccessControl {
 	function unwrap(address _wrapped_token, address _recipient, uint256 _amount ) public {
 		//YOUR CODE HERE, Anyone should be able to unwrap BridgeTokens, but only tokens they own.
     require(underlying_tokens[_wrapped_token] != address(0));
+  require( _amount > 0, 'Cannot mint 0' );
+   require( _recipient != address(0), 'Cannot unwrap to 0 address' );
     BridgeToken(_wrapped_token).burnfrom(msg.sender, _amount);
     emit Unwrap(underlying_tokens[_wrapped_token],_wrapped_token, msg.sender, _recipient,_amount );
 	}
