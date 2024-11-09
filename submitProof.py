@@ -99,6 +99,7 @@ def build_merkle(leaves):
             combinedhashes.append(combinedhash)
         tree.append(combinedhashes)
         size = len(combinedhashes)
+        leaves = combinedhashes
     return tree
 
 
