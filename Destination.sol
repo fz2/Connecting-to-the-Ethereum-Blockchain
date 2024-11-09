@@ -27,7 +27,7 @@ contract Destination is AccessControl {
     require(wrapped_tokens[_underlying_token] != address(0));
     BridgeToken(wrapped_tokens[_underlying_token]).mint(_recipient, _amount);
 
-    emit Wrap(_underlying_token, wrapped_token, _recipient, _amount);
+    emit Wrap(_underlying_token,wrapped_tokens[_underlying_token], _recipient, _amount);
 	}
 
 	function unwrap(address _wrapped_token, address _recipient, uint256 _amount ) public {
