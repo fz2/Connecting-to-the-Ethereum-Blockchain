@@ -99,7 +99,7 @@ def build_merkle(leaves):
             combinedhash = hash_pair(leaves[i], leaves[i+1])
             combinedhashes.append(combinedhash)
         tree.append(combinedhashes)
-        size = size//2
+        size = math.floor (size/2)
     return tree
 
 
@@ -111,12 +111,10 @@ def prove_merkle(merkle_tree, random_indx):
         returns a proof of inclusion as list of values
     """
     merkle_proof = []
-    root = merkle_tree[-1]
     # TODO YOUR CODE HERE
- 
     current_N = random_indx 
     for i in range(len(merkle_tree)-1):
-        if (len(merkle_tree[i] %2 == 1)):
+        if (len(merkle_tree[i] %2) == 1):
             merkle_proof.append(merkle_tree[i][current_N-1])
         else:
             merkle_proof.append(merkle_tree[i][current_N+1])
