@@ -24,24 +24,25 @@ contract Destination is AccessControl {
 
 	function wrap(address _underlying_token, address _recipient, uint256 _amount ) public onlyRole(WARDEN_ROLE) {
     // This function must check that underlying asset has been “registered,” i.e., that the owner of the destination contract has called createToken on the underlying asset.
-    
-    underlying_token = underlying_tokens[_underlying_token];
+    require(wrapped_token[_underlying_token] != address[0])
+    BridgeToken wrapped_token = wrapped_tokens[_underlying_token];
+	  wrapped_token.mint(_recipient, _amount);
 
-    _burnfrom(underlying_token, _amount);
-	_mint(_recipient, _amount);
-    emit Wrap(_underlying_token, address(this), _recipient, _amount);
+    emit Wrap(_underlying_token, wrapped_token, _recipient, _amount);
 	}
 
 	function unwrap(address _wrapped_token, address _recipient, uint256 _amount ) public {
 		//YOUR CODE HERE, Anyone should be able to unwrap BridgeTokens, but only tokens they own.
-		_burnfrom(_wrapped_token, _amount);
+    require(underlying_tokens[_wrapped_token] != address[0]);
+    BridgeToken (_wrapped_token).burnfrom(msg.sender, _amount);
+    emit Unwrap(underlying_tokens[_wrapped_token],_wrapped_token, msg.sender, _recipient,_amount )
 	}
 
 	function createToken(address _underlying_token, string memory name, string memory symbol ) public onlyRole(CREATOR_ROLE) returns(address) {
 		// When the createToken function is called, it will deploy a new BridgeToken contract, and return the address of the newly created contract.
     BridgeToken newToken = new BridgeToken(_underlying_token, name,symbol, address(this));
     underlying_tokens[address(newToken)] = _underlying_token;
-    wrapped_tokens[address(newToken)] = address(this);
+    wrapped_tokens[_underlying_token] = address(newToken);
     tokens.push(address(newToken));
     emit Creation(_underlying_token, address(newToken));
     return address(newToken);
