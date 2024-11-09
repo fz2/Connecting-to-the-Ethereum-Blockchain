@@ -37,7 +37,7 @@ contract Destination is AccessControl {
     require(underlying_tokens[_wrapped_token] != address(0));
   require( _amount > 0, 'Cannot mint 0' );
    require( _recipient != address(0), 'Cannot unwrap to 0 address' );
-    BridgeToken(_wrapped_token).burnfrom(msg.sender, _amount);
+    BridgeToken(_wrapped_token).burnFrom(msg.sender, _amount);
     emit Unwrap(underlying_tokens[_wrapped_token],_wrapped_token, msg.sender, _recipient,_amount );
 	}
 
