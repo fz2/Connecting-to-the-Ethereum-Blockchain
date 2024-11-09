@@ -99,7 +99,7 @@ def build_merkle(leaves):
             combinedhash = hash_pair(leaves[i], leaves[i+1])
             combinedhashes.append(combinedhash)
         tree.append(combinedhashes)
-        size = size/2
+        size = size//2
     return tree
 
 
