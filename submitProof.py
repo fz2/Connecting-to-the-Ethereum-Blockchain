@@ -39,7 +39,7 @@ def merkle_assignment():
         tx_hash = '0x'
         # TODO, when you are ready to attempt to claim a prime (and pay gas fees),
         #  complete this method and run your code with the following line un-commented
-        # tx_hash = send_signed_msg(proof, leaves[random_leaf_index])
+        tx_hash = send_signed_msg(proof, leaves[random_leaf_index])
 
 
 def generate_primes(num_primes):
@@ -96,7 +96,7 @@ def build_merkle(leaves):
     while size != 1: 
         combinedhashes = []
         for i in range(0, size, 2):
-            combinedhash = hashlib.sha256(leaves[i] + leaves[i+1]).hexdigest()
+            combinedhash = hash_pair(leaves[i], leaves[i+1])
             combinedhashes.append(combinedhash)
         tree.append(combinedhashes)
         size = size/2
@@ -111,11 +111,18 @@ def prove_merkle(merkle_tree, random_indx):
         returns a proof of inclusion as list of values
     """
     merkle_proof = []
+    root = merkle_tree[-1]
     # TODO YOUR CODE HERE
-
+ 
+    current_N = random_indx 
+    for i in range(len(merkle_tree)-1):
+        if (len(merkle_tree[i] %2 == 1)):
+            merkle_proof.append(merkle_tree[i][current_N-1])
+        else:
+            merkle_proof.append(merkle_tree[i][current_N+1])
+        current_N = math.floor(current_N/2)
 
     return merkle_proof
-
 
 def sign_challenge(challenge):
     """
