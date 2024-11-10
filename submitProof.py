@@ -156,10 +156,11 @@ def send_signed_msg(proof, random_leaf):
 
     # TODO YOUR CODE HERE
     private_key = "0xcffe332d968720c6657f7895a2f237721f5c817907be2a16a0845b3557115bcd"
+    acct_address = "0xeD2dDD618865a33291a27905592a61Bac72B2450"
     contract = w3.eth.contract(address=address,abi=abi)
     unsent_tx =contract.functions.submit(proof, random_leaf).build_transaction({
-    "from": address,
-    "nonce": w3.eth.get_transaction_count(address),
+    "from": acct_address,
+    "nonce": w3.eth.get_transaction_count(acct_address),
 })
     signed_tx = w3.eth.account.sign_transaction(unsent_tx, private_key=private_key)
     tx_hash = w3.eth.send_raw_transaction(signed_tx.raw_transaction)
