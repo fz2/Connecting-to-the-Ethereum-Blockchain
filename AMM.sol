@@ -57,9 +57,6 @@ contract AMM is AccessControl{
 		uint256 swapAmt;
 
 		//YOUR CODE HERE  
-    qtyA = ERC20(sellToken).balanceOf(address(this));
-    qtyB = ERC20(buyToken).balanceOf(address(this));
-    swapAmt = sellAmount * (10000 - feebps)/10000; 
     address buyToken;
     if (sellToken == tokenA){
       buyToken = tokenB;
@@ -67,9 +64,14 @@ contract AMM is AccessControl{
     if (sellToken == tokenB ){
       buyToken = tokenA;
     }
+    qtyA = ERC20(sellToken).balanceOf(address(this));
+    qtyB = ERC20(buyToken).balanceOf(address(this));
+    swapAmt = sellAmount * (10000 - feebps)/10000; 
+
+    uint256 buyAmount;
     buyAmount = qtyB - (invariant/(qtyA+swapAmt));
     ERC20(buyToken).transferFrom(buyToken, msg.sender, buyAmount);
-      
+
 		uint256 new_invariant = ERC20(tokenA).balanceOf(address(this))*ERC20(tokenB).balanceOf(address(this));
 		require( new_invariant >= invariant, 'Bad trade' );
 		invariant = new_invariant;
