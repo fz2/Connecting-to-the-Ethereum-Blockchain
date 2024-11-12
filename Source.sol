@@ -35,7 +35,7 @@ contract Source is AccessControl {
 		//Push the tokens to the recipient using the ERC20 “transfer” function
 		//Emit a “Withdraw” event
 
-		require(approved[msg.sender] == True);
+		require(approved[msg.sender] == true);
 		transfer(_recipient, _amount);
 		emit Withdrawal(_token, _recipient, _amount);
 	}
@@ -44,7 +44,7 @@ contract Source is AccessControl {
 		//Check that the function is being called by the contract owner, Check that the token has not already been registered
 		// Add the token address to the list of registered tokens; Emit a Registration event
 
-		require(approved[msg.sender] == True);
+		require(approved[msg.sender] == true);
 		//require ()
 		tokens.push(_token);
 		emit Registration(_token);
