@@ -67,7 +67,7 @@ contract Attacker is AccessControl, IERC777Recipient {
 	) external {
 		//YOUR CODE TO RECURSE GOES HERE
 
-    require(depth  max_depth)
+    //require(depth  max_depth)
 		bank.tokensReceived(operator, from, to, amount, userData, operatorData);
 		emit Recurse(depth);
     // recursively triggers reentrancy
