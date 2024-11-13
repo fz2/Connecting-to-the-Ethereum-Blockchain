@@ -38,7 +38,7 @@ contract Source is AccessControl {
 		require(approved[_token] == true);
     require(_amount >0);
 
-		ERC20.transfer(_recipient, _amount);
+		ERC20(_token).transfer(_recipient, _amount);
 		emit Withdrawal(_token, _recipient, _amount);
 	}
 
