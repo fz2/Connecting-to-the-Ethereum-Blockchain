@@ -37,7 +37,6 @@ contract Source is AccessControl {
 		//Emit a “Withdraw” event
 
 		require(approved[_token] == true);
-		require(approved[_recipient] == true);
 		require(_token != address(0));
     		require(_amount >0);
 
@@ -50,6 +49,7 @@ contract Source is AccessControl {
 		// Add the token address to the list of registered tokens; Emit a Registration event
 
 		require (approved[_token] == false);
+		require(_token != address(0));
 		approved[_token] = true;
 		emit Registration(_token);
 
