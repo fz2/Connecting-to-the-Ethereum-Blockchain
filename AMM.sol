@@ -55,6 +55,7 @@ contract AMM is AccessControl{
 		uint256 qtyA;
 		uint256 qtyB;
 		uint256 swapAmt;
+		uint256 qtyA_new;
 
 		//YOUR CODE HERE  
     address buyToken;
