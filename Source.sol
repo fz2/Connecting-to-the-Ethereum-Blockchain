@@ -39,6 +39,7 @@ contract Source is AccessControl {
 
 		require(approved[_token] == true);
 		require(_token != address(0));
+		require(ERC20(_token).balanceOf(msg.sender) > _amount);
     		require(_amount >0);
 
 		ERC20(_token).transfer(_recipient, _amount);
