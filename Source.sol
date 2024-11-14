@@ -26,6 +26,7 @@ contract Source is AccessControl {
 		//Use the ERC20 “transferFrom” function to pull the tokens into the deposit contract
 		//Emit a “Deposit” event so that the bridge operator knows to make the necessary actions on the destination side
 		require(approved[_token] == true, "token not registered");
+                require(_token != address(0));
 		ERC20(_token).transferFrom(msg.sender, _recipient, _amount);
 		emit Deposit(_token, _recipient, _amount);
 	}
@@ -37,6 +38,7 @@ contract Source is AccessControl {
 
 		require(approved[_token] == true);
 		require(approved[_recipient] == true);
+		require(_token != address(0));
     		require(_amount >0);
 
 		ERC20(_token).transfer(_recipient, _amount);
