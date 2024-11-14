@@ -55,6 +55,7 @@ contract AMM is AccessControl{
 		uint256 qtyA;
 		uint256 qtyB;
 		uint256 swapAmt;
+		uint256 qtyA_new;
 
 		//YOUR CODE HERE  
     address buyToken;
@@ -72,7 +73,7 @@ contract AMM is AccessControl{
     ERC20(buyToken).transferFrom(buyToken, msg.sender, swapAmt);
     ERC20(sellToken).transferFrom(msg.sender, sellToken, sellAmount);
 
-    uint 256 qtyA_new =  ERC20(tokenA).balanceOf(address(this));
+    qtyA_new =  ERC20(tokenA).balanceOf(address(this));
     require(qtyA != qtyA_new, 'bad trade');
 
 		uint256 new_invariant = ERC20(tokenA).balanceOf(address(this))*ERC20(tokenB).balanceOf(address(this));
