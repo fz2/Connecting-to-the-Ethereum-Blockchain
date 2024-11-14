@@ -48,7 +48,7 @@ contract Source is AccessControl {
 		// Add the token address to the list of registered tokens; Emit a Registration event
 
 		require (approved[_token] == false);
-		approved[_token] == true;
+		approved[_token] = true;
 		tokens.push(_token);
 		emit Registration(_token);
 
