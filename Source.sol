@@ -47,7 +47,8 @@ contract Source is AccessControl {
 		//Check that the function is being called by the contract owner, Check that the token has not already been registered
 		// Add the token address to the list of registered tokens; Emit a Registration event
 
-		require (approved[_token] == true);
+		require (approved[_token] == false);
+		approved[_token] == true;
 		tokens.push(_token);
 		emit Registration(_token);
 
