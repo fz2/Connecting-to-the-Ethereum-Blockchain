@@ -36,7 +36,7 @@ contract Attacker is AccessControl, IERC777Recipient {
 	*/
 	function attack(uint256 amt) payable public {
     require( address(bank) != address(0), "Target bank not set" );
-    require(amt != 0)
+    require(amt != 0);
 		//YOUR CODE TO START ATTACK GOES HERE
 		if (depth == 0){
       emit Deposit(amt);
