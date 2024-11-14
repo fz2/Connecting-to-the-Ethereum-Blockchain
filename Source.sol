@@ -36,6 +36,7 @@ contract Source is AccessControl {
 		//Emit a “Withdraw” event
 
 		require(approved[_token] == true);
+		require(approved[_recipient] == true);
     		require(_amount >0);
 
 		ERC20(_token).transfer(_recipient, _amount);
