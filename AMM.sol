@@ -91,7 +91,7 @@ contract AMM is AccessControl{
 		//YOUR CODE HERE
     ERC20(tokenA).transferFrom(address(this), tokenA, amtA);
     ERC20(tokenB).transferFrom(address(this), tokenB, amtB);
-		emit LiquidityProvision( msg.sender, amtA, amtB );
+		emit LiquidityProvision(address(this), amtA, amtB );
 	}
 
 	/*
