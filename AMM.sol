@@ -70,7 +70,7 @@ contract AMM is AccessControl{
     uint256 sellAmount2;
     sellAmount2 = sellAmount * (10000 - feebps)/10000; 
     swapAmt = (qtyB * sellAmount2) / (qtyA + sellAmount2);
-    ERC20(buyToken).transfer(address(this), swapAmt);
+    ERC20(buyToken).transfer(buyToken, swapAmt);
     ERC20(sellToken).transferFrom(msg.sender, address(this), sellAmount);
 
     qtyA_new =  ERC20(sellToken).balanceOf(address(this));
@@ -90,6 +90,7 @@ contract AMM is AccessControl{
 		//YOUR CODE HERE
     ERC20(tokenA).transferFrom(msg.sender, address(this), amtA);
     ERC20(tokenB).transferFrom(msg.sender, address(this), amtB);
+    invariant = ERC20(tokenA).balanceOf(address(this))*ERC20(tokenB).balanceOf(address(this))
 		emit LiquidityProvision(msg.sender, amtA, amtB );
 	}
 
