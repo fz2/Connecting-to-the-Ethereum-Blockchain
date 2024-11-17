@@ -42,7 +42,7 @@ contract Source is AccessControl {
 
 		require(approved[_token] == true);
 		require(_token != address(0));
-		require(ERC20(_token).balanceOf(msg.sender) > _amount);
+		require(ERC20(_token).balanceOf(address(this)) > _amount);
 		require( _amount > 0, 'Cannot deposit 0' );
 		require( _recipient != address(0), 'Cannot deposit to 0 address' );
 		require( approved[_token], 'Cannot deposit an unregistered token' );
