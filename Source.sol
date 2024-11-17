@@ -27,7 +27,6 @@ contract Source is AccessControl {
 		//Emit a “Deposit” event so that the bridge operator knows to make the necessary actions on the destination side
 		require(approved[_token] == true, "token not registered");
                 require(_token != address(0));
-		require(ERC20(_token).balanceOf(msg.sender) > _amount);
 		require( _amount > 0, 'Cannot deposit 0' );
 		require( _recipient != address(0), 'Cannot deposit to 0 address' );
 		require( approved[_token], 'Cannot deposit an unregistered token' );
