@@ -66,8 +66,8 @@ def scanBlocks(chain,start_block,end_block,contract_address):
                 'address': evt.address,
                 }
             with open(eventfile, "w") as csv_file:
-            w = csv.writer(csv_file)
-            w.writerow(data.values())
+                w = csv.writer(csv_file)
+                w.writerow(data.values())
             
     else:
         for block_num in range(start_block,end_block+1):
@@ -84,7 +84,7 @@ def scanBlocks(chain,start_block,end_block,contract_address):
                     'address': evt.address,
                     }
                 with open(eventfile, "w") as csv_file:
-                w = csv.writer(csv_file)
-                w.writerow(data.values())
+                    w = csv.writer(csv_file)
+                    w.writerow(data.values())
 
 
