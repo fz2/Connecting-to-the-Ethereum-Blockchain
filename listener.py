@@ -79,8 +79,7 @@ def scanBlocks(chain,start_block,end_block,contract_address):
                 'transactionHash': evt.transactionHash.hex(),
                 'address': evt.address,
                 }
-    with open(eventfile, "a") as csv_file:
-        writer = csv.writer(csv_file)
-        for key, value in data.items():
-            writer.writerow([key, value])
+    with open(eventfile, "w") as csv_file:
+        w = csv.writer(csv_file)
+        w.writerow(data.values())
 
