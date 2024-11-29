@@ -5,6 +5,7 @@ from web3.middleware import geth_poa_middleware #Necessary for POA chains
 import json
 from datetime import datetime
 import pandas as pd
+import csv
 
 eventfile = 'deposit_logs.csv'
 
@@ -54,12 +55,32 @@ def scanBlocks(chain,start_block,end_block,contract_address):
     if end_block - start_block < 30:
         event_filter = contract.events.Deposit.create_filter(fromBlock=start_block,toBlock=end_block,argument_filters=arg_filter)
         events = event_filter.get_all_entries()
-        #print( f"Got {len(events)} entries for block {block_num}" )
-        // YOUR CODE HERE
+        print( f"Got {len(events)} entries for block {block_num}" )
+        for evt in events:
+            data = {
+                'chain': chain, 
+                'token': evt.args['token'],
+                'recipient': evt.args['recipient'],
+                'amount': evt.args['amount'],
+                'transactionHash': evt.transactionHash.hex(),
+                'address': evt.address,
+    }
     else:
         for block_num in range(start_block,end_block+1):
             event_filter = contract.events.Deposit.create_filter(fromBlock=block_num,toBlock=block_num,argument_filters=arg_filter)
             events = event_filter.get_all_entries()
-            #print( f"Got {len(events)} entries for block {block_num}" )
-            // YOUR CODE HERE
+            print( f"Got {len(events)} entries for block {block_num}" )
+            for evt in events:
+                data = {
+                'chain': chain, 
+                'token': evt.args['token'],
+                'recipient': evt.args['recipient'],
+                'amount': evt.args['amount'],
+                'transactionHash': evt.transactionHash.hex(),
+                'address': evt.address,
+                }
+    with open(eventfile, "a") as csv_file:
+        writer = csv.writer(csv_file)
+        for key, value in data.items():
+            writer.writerow([key, value])
 
