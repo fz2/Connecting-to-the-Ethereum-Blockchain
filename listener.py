@@ -70,7 +70,7 @@ def scanBlocks(chain,start_block,end_block,contract_address):
                 }
             df.loc[count] = data
             count = count+1
-            df.to_csv(eventfile, index=False)  
+            df.to_csv(eventfile, mode= 'a', index=False)  
             
     else:
         for block_num in range(start_block,end_block+1):
@@ -89,6 +89,6 @@ def scanBlocks(chain,start_block,end_block,contract_address):
                     }
                 df.loc[count] = data
                 count = count+1
-                df.to_csv(eventfile, index=False)
+                df.to_csv(eventfile, mode= 'a', index=False)  
 
 
