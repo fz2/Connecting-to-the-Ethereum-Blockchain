@@ -64,7 +64,7 @@ def scanBlocks(chain,start_block,end_block,contract_address):
                 'chain': chain, 
                 'token': evt.args['token'],
                 'recipient': evt.args['recipient'],
-                'amount': evt.args['amount'],
+                'amount': int(evt.args['amount']),
                 'transactionHash': evt.transactionHash.hex(),
                 'address': evt.address,
                 }
@@ -83,7 +83,7 @@ def scanBlocks(chain,start_block,end_block,contract_address):
                     'chain': chain, 
                     'token': evt.args['token'],
                     'recipient': evt.args['recipient'],
-                    'amount': evt.args['amount'],
+                    'amount': int(evt.args['amount']),
                     'transactionHash': evt.transactionHash.hex(),
                     'address': evt.address,
                     }
