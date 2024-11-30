@@ -83,8 +83,8 @@ def scanBlocks(chain,start_block,end_block,contract_address):
                     'transactionHash': evt.transactionHash.hex(),
                     'address': evt.address,
                     }
-            df = pd.DataFrame({'chain':[], 'token':[], 'recipient':[], 'amount':[], 'transactionHash':[], 'address':[]})
-            df.loc[len(df)] = data
-            df.to_csv(eventfile, index=False)
+                df = pd.DataFrame({'chain':[], 'token':[], 'recipient':[], 'amount':[], 'transactionHash':[], 'address':[]})
+                df.loc[len(df)] = data
+                df.to_csv(eventfile, index=False)
 
 
