@@ -57,6 +57,7 @@ def scanBlocks(chain,start_block,end_block,contract_address):
         events = event_filter.get_all_entries()
         print( f"Got {len(events)} entries for block {block_num}" )
         for evt in events:
+            count = 1
             data = {
                 'chain': chain, 
                 'token': evt.args['token'],
@@ -66,8 +67,10 @@ def scanBlocks(chain,start_block,end_block,contract_address):
                 'address': evt.address,
                 }
             df = pd.DataFrame({'chain':[], 'token':[], 'recipient':[], 'amount':[], 'transactionHash':[], 'address':[]})
-            df.loc[len(df)] = data
-            df.to_csv(eventfile, index=False)  
+            df.loc[count] = data
+            count = count+1
+        
+        df.to_csv(eventfile, index=False)  
             
     else:
         for block_num in range(start_block,end_block+1):
@@ -84,7 +87,9 @@ def scanBlocks(chain,start_block,end_block,contract_address):
                     'address': evt.address,
                     }
                 df = pd.DataFrame({'chain':[], 'token':[], 'recipient':[], 'amount':[], 'transactionHash':[], 'address':[]})
-                df.loc[len(df)] = data
-                df.to_csv(eventfile, index=False)
+                df.loc[count] = data
+                count = count+1
+            
+            df.to_csv(eventfile, index=False)
 
 
