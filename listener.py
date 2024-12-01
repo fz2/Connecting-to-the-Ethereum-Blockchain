@@ -69,6 +69,7 @@ def scanBlocks(chain,start_block,end_block,contract_address):
                 'address': evt.address,
                 }
             new_data = pd.DataFrame(data.items(), columns= ['chain', 'token', 'recipient', 'amount', 'transactionHash', 'address'])
+            print(new_data)
             tmp = pd.read_csv(eventfile)
             df_new = pd.concat([tmp, new_data], ignore_index=True)
             df_new.to_csv(eventfile, mode= 'w', index=False)  
@@ -89,7 +90,9 @@ def scanBlocks(chain,start_block,end_block,contract_address):
                 'address': evt.address,
                 }
                 new_data = pd.DataFrame(data.items(), columns= ['chain', 'token', 'recipient', 'amount', 'transactionHash', 'address'])
+                print(new_data)
                 tmp = pd.read_csv(eventfile)
+                print(tmp)
                 df_new = pd.concat([tmp, new_data], ignore_index=True)
                 df_new.to_csv(eventfile, mode= 'w', index=False)  
 
