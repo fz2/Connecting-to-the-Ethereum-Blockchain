@@ -89,6 +89,6 @@ def scanBlocks(chain,start_block,end_block,contract_address):
                 'address': evt.address,
                 }
                 df.loc[len(df)] = data
-                df_new.to_csv(eventfile, mode= 'a', index=False)  
+                df.to_csv(eventfile, mode= 'a', index=False)  
 
 
