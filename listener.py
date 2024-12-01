@@ -59,13 +59,12 @@ def scanBlocks(chain,start_block,end_block,contract_address):
         event_filter = contract.events.Deposit.create_filter(fromBlock=start_block,toBlock=end_block,argument_filters=arg_filter)
         events = event_filter.get_all_entries()
         print( f"Got {len(events)} entries for block {block_num}" )
-        count = 1
         for evt in events:
             data = {
                 'chain': chain, 
                 'token': evt.args['token'],
                 'recipient': evt.args['recipient'],
-                'amount': evt.args['amount'],
+                'amount': int(evt.args['amount']),
                 'transactionHash': evt.transactionHash.hex(),
                 'address': evt.address,
                 }
@@ -82,15 +81,16 @@ def scanBlocks(chain,start_block,end_block,contract_address):
             count = 1
             for evt in events:
                 data = {
-                    'chain': chain, 
-                    'token': evt.args['token'],
-                    'recipient': evt.args['recipient'],
-                    'amount': int(evt.args['amount']),
-                    'transactionHash': evt.transactionHash.hex(),
-                    'address': evt.address,
-                    }
-                df.loc[count] = data
-                count = count+1
-                df.to_csv(eventfile, mode= 'a', index=False)  
+                'chain': chain, 
+                'token': evt.args['token'],
+                'recipient': evt.args['recipient'],
+                'amount': int(evt.args['amount']),
+                'transactionHash': evt.transactionHash.hex(),
+                'address': evt.address,
+                }
+            new_data = pd.DataFrame(data.items(), columns= ['chain', 'token', 'recipient', 'amount', 'transactionHash', 'address'])
+            tmp = pd.read_csv(eventfile)
+            df_new = pd.concat([tmp, new_data], ignore_index=True)
+            df_new.to_csv(eventfile, mode= 'w', index=False)  
 
 
