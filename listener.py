@@ -93,8 +93,8 @@ def scanBlocks(chain,start_block,end_block,contract_address):
                 df.loc[count] = data
                 count = count+1
                 df.to_csv(eventfile, mode= 'a', header= None,index=False)  
-        final_df = pd.read_csv(eventfile)
-        final_df.columns = ['chain', 'token', 'recipient', 'amount', 'transactionHash', 'address']
-        final_df.to_csv(eventfile, index = False)     
+            final_df = pd.read_csv(eventfile)
+            final_df.columns = ['chain', 'token', 'recipient', 'amount', 'transactionHash', 'address']
+            final_df.to_csv(eventfile, index = False)     
 
 
