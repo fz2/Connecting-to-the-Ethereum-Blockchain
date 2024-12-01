@@ -51,6 +51,9 @@ def scanBlocks(chain,start_block,end_block,contract_address):
         print( f"Scanning block {start_block} on {chain}" )
     else:
         print( f"Scanning blocks {start_block} - {end_block} on {chain}" )
+    
+    df = pd.DataFrame({'chain':[], 'token':[], 'recipient':[], 'amount':[], 'transactionHash':[], 'address':[]})
+    df.to_csv(eventfile, index=False)       
 
     if end_block - start_block < 30:
         event_filter = contract.events.Deposit.create_filter(fromBlock=start_block,toBlock=end_block,argument_filters=arg_filter)
@@ -58,7 +61,6 @@ def scanBlocks(chain,start_block,end_block,contract_address):
         print( f"Got {len(events)} entries for block {block_num}" )
         count = 1
         for evt in events:
-            df = pd.DataFrame({'chain':[], 'token':[], 'recipient':[], 'amount':[], 'transactionHash':[], 'address':[]})   
             data = {
                 'chain': chain, 
                 'token': evt.args['token'],
@@ -67,9 +69,10 @@ def scanBlocks(chain,start_block,end_block,contract_address):
                 'transactionHash': evt.transactionHash.hex(),
                 'address': evt.address,
                 }
+            df = pd.read_csv(eventfile)
             df.loc[count] = data
             count = count+1
-            df.to_csv(eventfile, mode= 'a', index=False)  
+            df.to_csv(eventfile, mode= 'w', index=False)  
          
     else:
         for block_num in range(start_block,end_block+1):
@@ -78,7 +81,6 @@ def scanBlocks(chain,start_block,end_block,contract_address):
             print( f"Got {len(events)} entries for block {block_num}" )
             count = 1
             for evt in events:
-                df = pd.DataFrame({'chain':[], 'token':[], 'recipient':[], 'amount':[], 'transactionHash':[], 'address':[]})   
                 data = {
                 'chain': chain, 
                 'token': evt.args['token'],
@@ -87,8 +89,9 @@ def scanBlocks(chain,start_block,end_block,contract_address):
                 'transactionHash': evt.transactionHash.hex(),
                 'address': evt.address,
                 }
+                df = pd.read_csv(eventfile)
                 df.loc[count] = data
                 count = count+1
-                df.to_csv(eventfile, mode= 'a', index=False)  
+                df.to_csv(eventfile, mode= 'w', index=False)  
 
 
