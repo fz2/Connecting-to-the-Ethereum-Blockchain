@@ -53,6 +53,7 @@ def scanBlocks(chain,start_block,end_block,contract_address):
         print( f"Scanning blocks {start_block} - {end_block} on {chain}" )
         
     df = pd.DataFrame({'chain':[], 'token':[], 'recipient':[], 'amount':[], 'transactionHash':[], 'address':[]})   
+    df.to_csv(eventfile, index = False)
     
     if end_block - start_block < 30:
         event_filter = contract.events.Deposit.create_filter(fromBlock=start_block,toBlock=end_block,argument_filters=arg_filter)
@@ -64,13 +65,14 @@ def scanBlocks(chain,start_block,end_block,contract_address):
                 'chain': chain, 
                 'token': evt.args['token'],
                 'recipient': evt.args['recipient'],
-                'amount': int(evt.args['amount']),
+                'amount': evt.args['amount'],
                 'transactionHash': evt.transactionHash.hex(),
                 'address': evt.address,
                 }
-            df.loc[count] = data
-            count = count+1
-            df.to_csv(eventfile, mode= 'a', index=False)  
+            new_data = pd.DataFrame(data.items(), columns= ['chain', 'token', 'recipient', 'amount', 'transactionHash', 'address'])
+            tmp = pd.read_csv(eventfile)
+            df_new = pd.concat([tmp, new_data], ignore_index=True)
+            df_new.to_csv(eventfile, mode= 'w', index=False)  
             
     else:
         for block_num in range(start_block,end_block+1):
